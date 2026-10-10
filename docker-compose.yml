@@ -1,0 +1,15 @@
+services:
+  app:
+    image: node:20-alpine
+    container_name: typing-app
+    restart: unless-stopped
+    working_dir: /app
+    environment:
+      PORT: 3000
+      JWT_SECRET: change_me_please_abc123
+    volumes:
+      - ./app:/app
+      - ./data:/data
+    ports:
+      - "8080:3000"
+    command: sh -c "cd /app && npm install --registry=https://registry.npmmirror.com express cors bcryptjs jsonwebtoken && node server.js"
